@@ -6,7 +6,7 @@ spec:
   destination:
     server: https://kubernetes.default.svc
   source:
-    repoURL: ${{values.destination.repo}}
+    repoURL: "https://${{values.destination.host}}/${{values.destination.owner}}/${{values.destination.repo}}"
     targetRevision: HEAD
 
 replicaCount: 1

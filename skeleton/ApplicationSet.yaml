@@ -3,7 +3,7 @@ apiVersion: v1
 stringData:
   project: default
   type: git
-  url: ${{values.destination.repo}}
+  url: "https://${{values.destination.host}}/${{values.destination.owner}}/${{values.destination.repo}}"
 kind: Secret
 metadata:
   annotations:
@@ -27,7 +27,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: ${{values.destination.repo}}
+        repoURL: "https://${{values.destination.host}}/${{values.destination.owner}}/${{values.destination.repo}}"
         targetRevision: HEAD
         path: helm
       destination:
