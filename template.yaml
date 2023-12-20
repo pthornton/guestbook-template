@@ -13,11 +13,17 @@ spec:
     - title: Provide some simple information
       required:
         - owner
+        - name
       properties:
         description:
           title: Description
           type: string
           description: Help others understand what this website is for.
+        name:
+          title: Name
+          type: string
+          description: Unique name of the component
+          ui:field: EntityNamePicker
         owner:
           title: Owner
           type: string
@@ -46,6 +52,7 @@ spec:
         copyWithoutRender:
           - .github/workflows/*
         values:
+          name: ${{ parameters.name }}
           description: ${{ parameters.description }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
           owner: ${{ parameters.owner }}
@@ -56,7 +63,7 @@ spec:
       input:
         allowedHosts:
           - github.com
-        description: This is guestbook
+        description: This is ${{ parameters.name }}
         repoUrl: ${{ parameters.repoUrl }}
 
     - id: register
