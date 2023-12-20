@@ -1,18 +1,14 @@
 ---
 apiVersion: v1
-stringData:
-  project: default
-  type: git
-  url: "https://${{values.destination.host}}/${{values.destination.owner}}/${{values.destination.repo}}"
 kind: Secret
 metadata:
-  annotations:
-    managed-by: argocd.argoproj.io
+  name: ${{values.destination.repo}}
+  namespace: argocd
   labels:
     argocd.argoproj.io/secret-type: repository
-  name: guestbook
-  namespace: argocd
 type: Opaque
+stringData:
+  url: "git@${{values.destination.host}}/${{values.destination.owner}}/${{values.destination.repo}}.git"
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -27,7 +23,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: "https://${{values.destination.host}}/${{values.destination.owner}}/${{values.destination.repo}}"
+        repoURL: "git@${{values.destination.host}}/${{values.destination.owner}}/${{values.destination.repo}}.git"
         targetRevision: HEAD
         path: helm
       destination:
